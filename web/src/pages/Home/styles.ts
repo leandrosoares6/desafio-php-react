@@ -5,10 +5,16 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1120px;
   margin: 0 auto;
-  padding: 40px 20px;
+
+  .action-content {
+    padding-top: 48px;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 
 export const Title = styled.h1`
+  padding-top: 72px;
   font-size: 48px;
   color: #454955;
 `;
@@ -18,7 +24,7 @@ export const Table = styled.div`
 
   > section {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     strong {
       color: #292a30;
       font-weight: normal;
@@ -27,9 +33,10 @@ export const Table = styled.div`
       font-size: 16px;
       line-height: 24px;
     }
-  }
-  span {
-    border-radius: 8px;
+
+    strong:last-child {
+      text-align: right;
+    }
   }
 `;
 

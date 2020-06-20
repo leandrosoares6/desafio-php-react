@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
+import { FiPlus } from 'react-icons/fi';
+
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
+// import history from '../../services/history';
 import { Container, Title, Table, ItemSkeleton } from './styles';
 import Project from '../Project';
 
 import api from '../../services/api';
 
 import Item from './Item';
+
+import SearchInput from '../../components/SearchInput';
+import Button from '../../components/Button';
 
 export interface Project {
   id: number;
@@ -40,13 +46,18 @@ const Home: React.FC = () => {
       highlightColor={lighten(0.04, '#F3EFF5')}
     >
       <Container>
-        <div>
-          <Title>Meus projetos</Title>
+        <Title>Meus projetos</Title>
+
+        <div className="action-content">
+          <SearchInput />
+          <Button Icon={FiPlus} title="ADICIONAR" type="button" />
         </div>
+
         <Table>
           <section>
             <strong>Id</strong>
             <strong>Descrição</strong>
+            <strong>Ações</strong>
           </section>
         </Table>
 

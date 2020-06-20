@@ -1,22 +1,56 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding-bottom: 10px;
-  small {
-    padding: 20px 32px;
-    border: 0;
+  section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     background: #fff;
-    font-size: 16px;
-    font-weight: normal;
-    color: #666;
-    text-align: left;
+    border-radius: 8px;
+
+    > small {
+      padding: 20px 32px;
+      border: 0;
+      font-size: 16px;
+      font-weight: normal;
+      color: #666;
+      text-align: left;
+    }
+
+    > div {
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      > button {
+        margin-right: 40px;
+      }
+    }
   }
-  small:first-child {
-    border-radius: 8px 0 0 8px;
-  }
-  small:last-child {
-    border-radius: 0 8px 8px 0;
+`;
+
+export const MoreContainer = styled.div`
+  > div {
+    display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    button {
+      background: none;
+      border: none;
+      display: flex;
+    }
+    svg {
+      margin-right: 8px;
+    }
+    span {
+      font-size: 16px;
+      color: #666;
+    }
+    :nth-last-child(-n + 1) {
+      padding-top: 6px;
+      border-top: 1px solid #eee;
+    }
+    :nth-last-child(1) {
+      padding-bottom: 0;
+    }
   }
 `;
