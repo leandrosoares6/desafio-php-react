@@ -26,7 +26,7 @@ class Atividade{
 	
 	/**
 	* @OneToOne(targetEntity="Projeto")
-	* @JoinColumn(name="idProjeto", referencedColumnName="id")
+	* @JoinColumn(name="idProjeto", referencedColumnName="id", onDelete="CASCADE")
 	*/
 	public $idProjeto;
 

@@ -36,7 +36,7 @@ CREATE TABLE `atividade` (
   `idProjeto` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idxprojeto` (`idProjeto`),
-  CONSTRAINT `idxprojeto` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`)
+  CONSTRAINT `idxprojeto` FOREIGN KEY (`idProjeto`) REFERENCES `projeto` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
