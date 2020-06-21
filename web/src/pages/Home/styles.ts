@@ -19,6 +19,16 @@ export const Title = styled.h1`
   color: #454955;
 `;
 
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+
+  > strong {
+    padding-bottom: 24px;
+  }
+`;
+
 export const Table = styled.div`
   margin-top: 64px;
 

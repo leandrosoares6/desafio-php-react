@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Container = styled.button`
-  padding-right: 16px;
-  padding-left: 10px;
-  height: 36px;
+  padding: 16px;
+  height: 42px;
 
   font-size: 14px;
   font-weight: bold;

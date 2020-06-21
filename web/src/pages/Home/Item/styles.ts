@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  padding-bottom: 10px;
   section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     background: #fff;
-    border-radius: 8px;
+    border-radius: 4px;
 
     > small {
       padding: 20px 32px;
@@ -30,6 +31,7 @@ export const Container = styled.div`
 
 export const MoreContainer = styled.div`
   > div {
+    padding: 5px;
     display: flex;
     align-items: center;
     padding-bottom: 6px;

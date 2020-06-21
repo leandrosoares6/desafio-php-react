@@ -10,9 +10,10 @@ import history from '../../../services/history';
 
 interface ProjectItemProps {
   data: Partial<Project>;
+  onDelete: Function;
 }
 
-const Item: React.FC<ProjectItemProps> = ({ data }) => {
+const Item: React.FC<ProjectItemProps> = ({ data, onDelete }) => {
   return (
     <Container>
       <section>
@@ -32,7 +33,7 @@ const Item: React.FC<ProjectItemProps> = ({ data }) => {
                 </button>
               </div>
               <div>
-                <button onClick={() => {}} type="button">
+                <button onClick={() => onDelete(data.id)} type="button">
                   <FiDelete color="red" size={15} />
                   <span>Excluir</span>
                 </button>
