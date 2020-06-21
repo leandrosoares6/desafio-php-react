@@ -10,10 +10,9 @@ import Popup from 'reactjs-popup';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
 // import history from '../../services/history';
+import axios from 'axios';
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
 import Project from '../Project';
-
-import api from '../../services/api';
 
 import Item from './Item';
 
@@ -38,7 +37,7 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(async (data: ProjectFormData) => {
-    const response = await api.post('/projetos', {
+    const response = await axios.post('/projetos', {
       descricao: data.description,
     });
 
@@ -47,7 +46,11 @@ const Home: React.FC = () => {
 
   const handleDelete = useCallback(
     async (id: number) => {
-      await api.delete(`/projetos/${id}`);
+      await axios.delete(`projetos/${id}`, {
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
 
       setProjects(projects.filter(project => project.id !== id));
     },
@@ -58,7 +61,7 @@ const Home: React.FC = () => {
     async function loadProjects(): Promise<void> {
       setLoading(true);
 
-      const response = await api.get<Project[]>('/projetos');
+      const response = await axios.get<Project[]>('/projetos');
 
       setProjects(response.data);
 
