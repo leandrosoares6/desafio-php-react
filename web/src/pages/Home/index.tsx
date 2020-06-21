@@ -6,6 +6,7 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import Popup from 'reactjs-popup';
+import { toast } from 'react-toastify';
 
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
@@ -46,13 +47,24 @@ const Home: React.FC = () => {
 
   const handleDelete = useCallback(
     async (id: number) => {
-      await axios.delete(`projetos/${id}`, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      const confirm = window.confirm(
+        'Ao excluir o projeto as atividades relacionadas também serão removidas. Deseja prosseguir?',
+      );
 
-      setProjects(projects.filter(project => project.id !== id));
+      if (!confirm) {
+        toast.error('Projeto não removido!');
+        return;
+      }
+
+      try {
+        await axios.delete(`projetos/${id}`);
+
+        setProjects(projects.filter(project => project.id !== id));
+
+        toast.success('Projeto removido com sucesso!');
+      } catch (err) {
+        toast.error('Esse projeto não pode ser removido!');
+      }
     },
     [projects],
   );
