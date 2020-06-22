@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  ChangeEvent,
+} from 'react';
 
 import { FiPlus } from 'react-icons/fi';
 
@@ -10,7 +16,7 @@ import { toast } from 'react-toastify';
 
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
-// import history from '../../services/history';
+
 import axios from 'axios';
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
 
@@ -33,6 +39,8 @@ const Home: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
   const [projects, setProjects] = useState<Project[]>([]);
+
+  const [search, setSearch] = useState('');
 
   const [loading, setLoading] = useState(false);
 
@@ -72,17 +80,21 @@ const Home: React.FC = () => {
     async function loadProjects(): Promise<void> {
       setLoading(true);
 
-      const response = await axios.get<Project[]>('/projetos');
+      const response = await axios.get<Project[]>('/projetos', {
+        params: {
+          q: search,
+        },
+      });
 
       setProjects(response.data);
 
       setTimeout(() => {
         setLoading(false);
-      }, 1600);
+      }, 600);
     }
 
     loadProjects();
-  }, [handleSubmit]);
+  }, [handleSubmit, search]);
 
   return (
     <SkeletonTheme
@@ -93,7 +105,12 @@ const Home: React.FC = () => {
         <Title>Meus projetos</Title>
 
         <div className="action-content">
-          <SearchInput />
+          <SearchInput
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.target?.value)
+            }
+            placeholder="Buscar por projetos"
+          />
 
           <Popup
             trigger={<Button Icon={FiPlus} title="ADICIONAR" type="button" />}

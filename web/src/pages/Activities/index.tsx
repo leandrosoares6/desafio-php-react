@@ -40,25 +40,22 @@ interface ActivityFormData {
 const Activities: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const location = useLocation();
+  const { state } = useLocation();
 
-  // const { id: projectId, descricao } = location.state;
-
-  const projectId = 29;
+  const { id: projectId, descricao } = state.data;
 
   const [activities, setActivities] = useState<ActivityResponse[]>([]);
-  const [data, setData] = useState({});
 
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
     async (data: ActivityFormData) => {
-      /* const response = await api.post('atividades', {
+      const response = await axios.post('atividades', {
         idProjeto: projectId,
         descricao: data.description,
       });
 
-      setActivities(oldActivities => [...oldActivities, response.data]); */
+      setActivities(oldActivities => [...oldActivities, response.data]);
     },
     [projectId],
   );
@@ -109,11 +106,11 @@ const Activities: React.FC = () => {
       highlightColor={lighten(0.04, '#F3EFF5')}
     >
       <Container>
-        <Title>Projeto tal</Title>
+        <Title>{descricao}</Title>
+        <strong>Atividades</strong>
 
         <div className="action-content">
           <SearchInput />
-          <Title>Atividades</Title>
           <Popup
             trigger={<Button Icon={FiPlus} title="ADICIONAR" type="button" />}
             modal

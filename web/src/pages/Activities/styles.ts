@@ -6,15 +6,25 @@ export const Container = styled.div`
   max-width: 1120px;
   margin: 0 auto;
 
+  display: flex;
+  flex-direction: column;
+
+  > strong {
+    padding-top: 24px;
+    font-size: 32px;
+    color: #454955;
+  }
+
   .action-content {
-    padding-top: 48px;
+    padding-top: 32px;
     display: flex;
     justify-content: space-between;
   }
 `;
 
 export const Title = styled.h1`
-  padding-top: 72px;
+  text-align: center;
+  padding-top: 48px;
   font-size: 48px;
   color: #454955;
 `;

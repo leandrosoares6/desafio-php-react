@@ -12,6 +12,7 @@ class Projetos extends CI_Controller {
 	}
 
 	public function index() {
+		$q = $this->input->get('q');
 		$projetos = $this->doctrine->em->getRepository("Entity\Projeto")->findAll();
 		echo json_encode($projetos);
 	}
