@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
 
 import { FiPlus } from 'react-icons/fi';
 
@@ -13,6 +12,7 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
 
 // import api from '../../services/api';
+import axios from 'axios';
 
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
 
@@ -21,8 +21,6 @@ import Item from './Item';
 import SearchInput from '../../components/SearchInput';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-
-type TParams = { id: string };
 
 export interface ActivityResponse {
   id: number;
@@ -40,12 +38,11 @@ interface ActivityFormData {
   description: string;
 }
 
-const Activities: React.FC<RouteComponentProps<TParams>> = ({
-  match,
-}: RouteComponentProps<TParams>) => {
+const Activities: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { id: projectId } = match.params;
+  // const { id: projectId } = match.params;
+  const projectId = 29;
 
   const [activities, setActivities] = useState<ActivityResponse[]>([]);
 
@@ -73,7 +70,7 @@ const Activities: React.FC<RouteComponentProps<TParams>> = ({
       }
 
       try {
-        // await api.delete(`atividades/${id}`);
+        await axios.delete(`atividades/${id}`);
 
         setActivities(activities.filter(activity => activity.id !== id));
 
@@ -89,11 +86,11 @@ const Activities: React.FC<RouteComponentProps<TParams>> = ({
     async function loadActivities(): Promise<void> {
       setLoading(true);
 
-      /* const response = await api.get<ActivityResponse[]>(
+      const response = await axios.get<ActivityResponse[]>(
         `projetos/${projectId}/atividades`,
-      ); */
+      );
 
-      // setActivities(response.data);
+      setActivities(response.data);
 
       setTimeout(() => {
         setLoading(false);
