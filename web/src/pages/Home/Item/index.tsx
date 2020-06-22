@@ -25,7 +25,7 @@ const Item: React.FC<ProjectItemProps> = ({ data, onDelete }) => {
             <MoreContainer>
               <div>
                 <button
-                  onClick={() => history.push(`/projects/form/${data.id}`)}
+                  onClick={() => history.push('/activities')}
                   type="button"
                 >
                   <FiEdit color="blue" size={15} />
