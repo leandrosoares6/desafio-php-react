@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-
+import { useLocation } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
@@ -11,7 +11,6 @@ import { toast } from 'react-toastify';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
 
-// import api from '../../services/api';
 import axios from 'axios';
 
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
@@ -41,10 +40,14 @@ interface ActivityFormData {
 const Activities: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  // const { id: projectId } = match.params;
+  const location = useLocation();
+
+  // const { id: projectId, descricao } = location.state;
+
   const projectId = 29;
 
   const [activities, setActivities] = useState<ActivityResponse[]>([]);
+  const [data, setData] = useState({});
 
   const [loading, setLoading] = useState(false);
 

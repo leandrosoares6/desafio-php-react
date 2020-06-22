@@ -1,12 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { FiEdit, FiDelete } from 'react-icons/fi';
 import More from '../../../components/MorePopup';
 
 import { Container, MoreContainer } from './styles';
 import { Project } from '..';
-
-import history from '../../../services/history';
 
 interface ProjectItemProps {
   data: Partial<Project>;
@@ -24,13 +23,17 @@ const Item: React.FC<ProjectItemProps> = ({ data, onDelete }) => {
           <More>
             <MoreContainer>
               <div>
-                <button
-                  onClick={() => history.push('/activities')}
-                  type="button"
+                <Link
+                  to={{
+                    pathname: '/activities',
+                    state: {
+                      data,
+                    },
+                  }}
                 >
                   <FiEdit color="blue" size={15} />
                   <span>Gerenciar</span>
-                </button>
+                </Link>
               </div>
               <div>
                 <button onClick={() => onDelete(data.id)} type="button">

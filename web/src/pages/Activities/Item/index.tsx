@@ -6,8 +6,6 @@ import More from '../../../components/MorePopup';
 import { Container, MoreContainer } from './styles';
 import { Activity } from '..';
 
-import history from '../../../services/history';
-
 interface ActivityItemProps {
   data: Partial<Activity>;
   onDelete: Function;
@@ -24,10 +22,7 @@ const Item: React.FC<ActivityItemProps> = ({ data, onDelete }) => {
           <More>
             <MoreContainer>
               <div>
-                <button
-                  onClick={() => history.push(`/projects/form/${data.id}`)}
-                  type="button"
-                >
+                <button onClick={() => {}} type="button">
                   <FiEdit color="blue" size={15} />
                   <span>Editar</span>
                 </button>

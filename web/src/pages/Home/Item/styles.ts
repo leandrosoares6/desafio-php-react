@@ -35,6 +35,11 @@ export const MoreContainer = styled.div`
     display: flex;
     align-items: center;
     padding-bottom: 6px;
+
+    a {
+      text-decoration: none;
+    }
+
     button {
       background: none;
       border: none;
