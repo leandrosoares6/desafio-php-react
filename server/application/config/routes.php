@@ -12,7 +12,9 @@ $route['projetos/(:num)']['delete'] = 'projetos/delete/$1';
 $route['projetos/(:num)/atividades']['get'] = 'atividades/projeto/$1';
 
 // Rotas da entidade Atividade
-$route['atividades/(:num)'] = 'atividades/get/$1';
+$route['atividades']['post'] = 'atividades/create';
+$route['atividades/(:num)']['get'] = 'atividades/get/$1';
+$route['atividades/(:num)']['delete'] = 'atividades/delete/$1';
 
 // Rota para popular dados
 $route['principal/povoar'] = 'principal/povoar';
