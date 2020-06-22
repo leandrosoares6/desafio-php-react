@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+  ChangeEvent,
+} from 'react';
 import { useLocation } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
@@ -46,6 +52,8 @@ const Activities: React.FC = () => {
 
   const [activities, setActivities] = useState<ActivityResponse[]>([]);
 
+  const [search, setSearch] = useState('');
+
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = useCallback(
@@ -88,6 +96,11 @@ const Activities: React.FC = () => {
 
       const response = await axios.get<ActivityResponse[]>(
         `projetos/${projectId}/atividades`,
+        {
+          params: {
+            q: search,
+          },
+        },
       );
 
       setActivities(response.data);
@@ -98,7 +111,7 @@ const Activities: React.FC = () => {
     }
 
     loadActivities();
-  }, [handleSubmit, projectId]);
+  }, [handleSubmit, projectId, search]);
 
   return (
     <SkeletonTheme
@@ -110,7 +123,13 @@ const Activities: React.FC = () => {
         <strong>Atividades</strong>
 
         <div className="action-content">
-          <SearchInput />
+          <SearchInput
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.target?.value)
+            }
+            placeholder="Buscar por atividades"
+          />
+
           <Popup
             trigger={<Button Icon={FiPlus} title="ADICIONAR" type="button" />}
             modal

@@ -1,4 +1,8 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use Doctrine\ORM\Query\ResultSetMapping;
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Atividades extends CI_Controller{
 	function __construct(){
@@ -11,9 +15,22 @@ class Atividades extends CI_Controller{
 	}
 	
 	public function projeto($id){
+		$queryParam = $this->input->get('q');
 		$data = [];
-		$atividades = $this->doctrine->em->getRepository("Entity\Atividade")
-									 ->findBy(array("idProjeto"=>$id),array("dataCadastro"=>"asc"));	
+
+		$rsm = new ResultSetMapping();
+		$rsm->addEntityResult('Entity\Atividade', 'a');
+		$rsm->addFieldResult('a', 'id', 'id');
+		$rsm->addFieldResult('a', 'descricao', 'descricao');
+
+		$rawQuery = 'SELECT * FROM atividade where idProjeto = ? and descricao like ?';
+
+		$query = $this->doctrine->em->createNativeQuery($rawQuery, $rsm);
+		$queryParamFormatted = "%" . trim($queryParam) . "%";
+		$query->setParameter(1, $id);
+		$query->setParameter(2, $queryParamFormatted);
+		$atividades = $query->getResult();
+
 		foreach($atividades as $atividade){
 			$data[] = [
 				"id"=>$atividade->getId(),
@@ -36,8 +53,8 @@ class Atividades extends CI_Controller{
     }
 		
 		public function create() {
-			$request = file_get_contents("php://input");
-			$_POST = json_decode($request, true);
+			$requisicao = file_get_contents("php://input");
+			$_POST = json_decode($requisicao, true);
 	
 			$atividade = new Entity\Atividade;
 			$projeto = $this->doctrine->em->find("Entity\Projeto",(int) $_POST["idProjeto"]);

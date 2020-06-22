@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use Doctrine\ORM\Query\ResultSetMapping;
+
 class Projetos extends CI_Controller {
 	function __construct(){
 		header("Access-Control-Allow-Origin: *");
@@ -11,10 +13,24 @@ class Projetos extends CI_Controller {
 		parent::__construct();
 	}
 
+	// Exemplificando createNativeQuery
 	public function index() {
-		$q = $this->input->get('q');
-		$projetos = $this->doctrine->em->getRepository("Entity\Projeto")->findAll();
-		echo json_encode($projetos);
+		$queryParam = $this->input->get('q');
+
+		$rsm = new ResultSetMapping();
+		$rsm->addEntityResult('Entity\Projeto', 'p');
+		$rsm->addFieldResult('p', 'id', 'id');
+		$rsm->addFieldResult('p', 'descricao', 'descricao');
+
+		
+		$rawQuery = 'SELECT * FROM projeto where descricao like ?';
+
+		$query = $this->doctrine->em->createNativeQuery($rawQuery, $rsm);
+		$queryParamFormatted = "%" . trim($queryParam) . "%";
+		$query->setParameter(1, $queryParamFormatted);
+		$resultado = $query->getResult();
+
+		echo json_encode($resultado);
 	}
 
 	public function create() {
