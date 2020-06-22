@@ -13,7 +13,6 @@ import { lighten, shade } from 'polished';
 // import history from '../../services/history';
 import axios from 'axios';
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
-import Project from '../Project';
 
 import Item from './Item';
 
