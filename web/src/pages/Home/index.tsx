@@ -18,6 +18,7 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 import { lighten, shade } from 'polished';
 
 import axios from 'axios';
+
 import { Container, Title, Content, Table, ItemSkeleton } from './styles';
 
 import Item from './Item';

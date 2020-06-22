@@ -9,6 +9,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
+  .header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 48px;
+
+    > a {
+      > svg {
+        margin-right: 16px;
+      }
+    }
+  }
+
   > strong {
     padding-top: 24px;
     font-size: 32px;
@@ -24,7 +37,6 @@ export const Container = styled.div`
 
 export const Title = styled.h1`
   text-align: center;
-  padding-top: 48px;
   font-size: 48px;
   color: #454955;
 `;

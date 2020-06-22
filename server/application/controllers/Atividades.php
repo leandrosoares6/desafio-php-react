@@ -68,6 +68,18 @@ class Atividades extends CI_Controller{
 			echo json_encode($atividade);
 		}
 	
+		public function update($id) {
+			$requisicao = file_get_contents("php://input");
+			$_PUT = json_decode($requisicao, true);
+
+			$atividade = $this->doctrine->em->find("Entity\Atividade",$id);
+			$atividade->setDescricao($_PUT["descricao"]);
+			$this->doctrine->em->persist($atividade);
+			$this->doctrine->em->flush();
+
+			echo json_encode($atividade);
+		}
+
 		public function delete($id) {
 			$atividade = $this->doctrine->em->find("Entity\Atividade",$id);
 			$this->doctrine->em->remove($atividade);

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding-bottom: 10px;
+
   section {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -35,24 +36,39 @@ export const MoreContainer = styled.div`
     display: flex;
     align-items: center;
     padding-bottom: 6px;
-    button {
+
+    > button {
       background: none;
       border: none;
       display: flex;
     }
+
     svg {
       margin-right: 8px;
     }
+
     span {
       font-size: 16px;
       color: #666;
     }
+
     :nth-last-child(-n + 1) {
       padding-top: 6px;
       border-top: 1px solid #eee;
     }
+
     :nth-last-child(1) {
       padding-bottom: 0;
     }
+  }
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+
+  > strong {
+    padding-bottom: 24px;
   }
 `;

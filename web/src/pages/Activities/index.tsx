@@ -5,8 +5,8 @@ import React, {
   useCallback,
   ChangeEvent,
 } from 'react';
-import { useLocation } from 'react-router-dom';
-import { FiPlus } from 'react-icons/fi';
+import { useLocation, Link } from 'react-router-dom';
+import { FiPlus, FiArrowLeft } from 'react-icons/fi';
 
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -70,13 +70,6 @@ const Activities: React.FC = () => {
 
   const handleDelete = useCallback(
     async (id: number) => {
-      const confirm = window.confirm('Deseja excluir a atividade?');
-
-      if (!confirm) {
-        toast.error('Atividade não removida!');
-        return;
-      }
-
       try {
         await axios.delete(`atividades/${id}`);
 
@@ -119,7 +112,12 @@ const Activities: React.FC = () => {
       highlightColor={lighten(0.04, '#F3EFF5')}
     >
       <Container>
-        <Title>{descricao}</Title>
+        <div className="header-content">
+          <Link to="/">
+            <FiArrowLeft size={36} />
+          </Link>
+          <Title>{descricao}</Title>
+        </div>
         <strong>Atividades</strong>
 
         <div className="action-content">

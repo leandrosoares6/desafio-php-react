@@ -14,6 +14,7 @@ $route['projetos/(:num)/atividades']['get'] = 'atividades/projeto/$1';
 // Rotas da entidade Atividade
 $route['atividades']['post'] = 'atividades/create';
 $route['atividades/(:num)']['get'] = 'atividades/get/$1';
+$route['atividades/(:num)']['put'] = 'atividades/update/$1';
 $route['atividades/(:num)']['delete'] = 'atividades/delete/$1';
 
 // Rota para popular dados
